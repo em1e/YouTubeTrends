@@ -1,7 +1,26 @@
 from googleapiclient.discovery import build
 import pandas as pd
+import os
 
-API_KEY = "AIzaSyC6I8w579oQOsPHMaTlcmNqJnDfJqLn9R8"
+# Prefer reading API_KEY from environment; if you keep a local .env file for
+# development, python-dotenv will load it when available.
+API_KEY = os.getenv("API_KEY")
+if not API_KEY:
+    try:
+        # lazy import so python-dotenv is optional
+        from dotenv import load_dotenv
+        # look for .env in project root (two levels up from scripts/)
+        env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
+        load_dotenv(env_path)
+        API_KEY = os.getenv("API_KEY")
+    except Exception:
+        API_KEY = None
+
+if not API_KEY:
+    raise RuntimeError(
+        "API_KEY is not set. Set the API_KEY environment variable or create a .env file with API_KEY=<your_key>."
+    )
+
 youtube = build('youtube', 'v3', developerKey=API_KEY)
 
 def get_trending_videos(region="US", max_results=50):
