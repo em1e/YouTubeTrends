@@ -3,3 +3,4 @@ data/*
 dbt/logs/*
 dbt/.user.yml
 .env
+dags/__pycache__

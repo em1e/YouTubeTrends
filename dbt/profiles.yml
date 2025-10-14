@@ -1,0 +1,11 @@
+youtube_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: yt_user
+      password: password
+      port: 5432
+      dbname: youtube_data
+      schema: public
