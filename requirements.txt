@@ -1,5 +1,5 @@
 google-api-python-client==2.70.0
 pandas==2.2.3
 python-dotenv==1.0.0
-SQLAlchemy==2.0.22
+# SQLAlchemy==2.0.22
 psycopg2-binary==2.9.6

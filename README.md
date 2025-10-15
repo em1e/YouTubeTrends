@@ -16,7 +16,7 @@ There are two main scripts in `scripts/`:
 - `fetch_trending.py` — calls the YouTube API and saves a CSV in `data/`.
 - `load_to_db.py` — reads a CSV from `data/` and appends it to a Postgres table.
 
-There is also an Airflow DAG at `dags/youtube_trending_dag.py` (you can schedule the fetch if you use Airflow). At the moment the dag is scheduled for every 15 minutes.
+There is also an Airflow DAG at `dags/youtube_trending_dag.py`, which can be used to schedule the fetch with Airflow. At the moment the dag is scheduled for every 15 minutes.
 
 <details>
 <summary> ---- How it works in more detail ----</summary>
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 4) Create postgres database (if you haven't yet)
 
-	The loader script `scripts/load_to_db.py` currently uses a hardcoded connection:
+	The loader script `scripts/load_to_db.py` currently uses a hardcoded connection :P:
 
 	`postgresql://yt_user:password@localhost:5432/youtube_data`
 
@@ -65,7 +65,7 @@ pip install -r requirements.txt
 
 	#### Using Docker:
 
-	  1. Start a Postgres container with a mapped port and a default password (these are hardcoded in the scripts :P):
+	  1. Start a Postgres container with a mapped port and a default password:
 
 	```
 	docker run --name yt-postgres -e POSTGRES_PASSWORD=password -e POSTGRES_USER=yt_user -e POSTGRES_DB=youtube_data -p 5432:5432 -d postgres:15
@@ -104,6 +104,9 @@ I'm using Airflows default Docker Compose file to run the airflow webserver, req
 - `docker compose down --volumes --rmi all` -> clean up when done
 
 Then you should be able to open the Airflow web server at http://localhost:8080 and enable the `youtube_trending_pipeline` DAG.
+
+user: `airflow`
+password: `airflow`
 
 ## What did I learn?
 I learned a lot during a small window, Airflow, DAGs, dbt, Youtube API and all that stuff was completely new to me! Gotta say I overall enjoyed the debugging and learning process C:

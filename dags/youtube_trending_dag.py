@@ -10,7 +10,9 @@ default_args = {
     "retry_delay": timedelta(minutes=5),
 }
 
-repo_root = Path(__file__).resolve().parents[1]
+dags_dir = Path(__file__).resolve().parent
+project_root = dags_dir.parents[0]
+scripts_dir = dags_dir / "scripts"
 
 with DAG(
     dag_id="youtube_trending_pipeline",
@@ -23,17 +25,17 @@ with DAG(
 
     fetch = BashOperator(
         task_id="fetch_data",
-        bash_command=f"python {repo_root}/scripts/fetch_trending.py",
+        bash_command=f"python3 {scripts_dir}/fetch_trending.py",
     )
 
     load = BashOperator(
         task_id="load_to_db",
-        bash_command=f"python3 {repo_root}/scripts/load_to_db.py"
+        bash_command=f"python3 {scripts_dir}/load_to_db.py",
     )
 
     transform = BashOperator(
         task_id="run_dbt",
-        bash_command=f"cd {repo_root}/dbt && dbt run"
+        bash_command=f"cd {project_root}/dbt && dbt run"
     )
 
     fetch >> load >> transform
