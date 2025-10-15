@@ -6,3 +6,4 @@ dbt/target/*
 .env
 dags/__pycache__
 logs/*
+config/*
