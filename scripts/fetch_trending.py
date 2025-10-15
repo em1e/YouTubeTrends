@@ -2,15 +2,11 @@ from googleapiclient.discovery import build
 import pandas as pd
 import os
 
-# Prefer reading API_KEY from environment; if you keep a local .env file for
-# development, python-dotenv will load it when available.
 API_KEY = os.getenv("API_KEY")
 if not API_KEY:
     try:
-        # lazy import so python-dotenv is optional
         from dotenv import load_dotenv
-        # look for .env in project root (two levels up from scripts/)
-        env_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".env"))
+        env_path = "/Users/mie/Desktop/side_projects/YouTubeTrends/.env"
         load_dotenv(env_path)
         API_KEY = os.getenv("API_KEY")
     except Exception:
@@ -45,7 +41,7 @@ def get_trending_videos(region="US", max_results=50):
     } for i in items]
 
     df = pd.DataFrame(data)
-    df.to_csv(f"data/trending_{region}.csv", index=False)
+    df.to_csv(f"/Users/mie/Desktop/side_projects/YouTubeTrends/data/trending_{region}.csv", index=False)
     print(f"Saved {len(df)} trending videos for {region}")
 
 get_trending_videos("US")

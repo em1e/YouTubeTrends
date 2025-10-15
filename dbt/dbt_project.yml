@@ -1,0 +1,13 @@
+name: 'youtube_trends'
+version: '1.0.0'
+config-version: 2
+
+profile: 'youtube_dbt'
+
+model-paths: ["models"]
+target-path: "target"
+clean-targets: ["target"]
+
+models:
+  youtube_trends:
+    +materialized: table

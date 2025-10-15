@@ -5,4 +5,4 @@ SELECT
 FROM trending_videos
 GROUP BY channel_title
 ORDER BY total_views DESC
-LIMIT 10;
+LIMIT 10

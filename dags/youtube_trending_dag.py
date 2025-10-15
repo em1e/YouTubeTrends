@@ -29,7 +29,7 @@ with DAG(
 
     transform = BashOperator(
         task_id="run_dbt",
-        bash_command="cd dbt && dbt run"
+        bash_command="cd /Users/mie/Desktop/side_projects/YouTubeTrends/dbt && dbt run"
     )
 
     fetch >> load >> transform

@@ -2,5 +2,7 @@ to-do.md
 data/*
 dbt/logs/*
 dbt/.user.yml
+dbt/target/*
 .env
 dags/__pycache__
+logs/*
