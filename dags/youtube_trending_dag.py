@@ -1,5 +1,7 @@
 from airflow import DAG
 from airflow.providers.standard.operators.bash import BashOperator
+from airflow.providers.standard.operators.python import PythonOperator
+from scripts.load_to_db import load_latest
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -28,9 +30,10 @@ with DAG(
         bash_command=f"python3 {scripts_dir}/fetch_trending.py",
     )
 
-    load = BashOperator(
+    load = PythonOperator(
         task_id="load_to_db",
-        bash_command=f"python3 {scripts_dir}/load_to_db.py",
+        python_callable=load_latest,
+        op_kwargs={"dry_run": False},
     )
 
     transform = BashOperator(
