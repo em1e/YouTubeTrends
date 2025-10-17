@@ -3,3 +3,5 @@ pandas==2.2.3
 python-dotenv==1.0.0
 SQLAlchemy==1.4.54
 psycopg2-binary==2.9.6
+dbt-core
+dbt-postgres

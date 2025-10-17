@@ -7,3 +7,4 @@ dbt/target/*
 dags/__pycache__
 logs/*
 config/*
+dags/data/*

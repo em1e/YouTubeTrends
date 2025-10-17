@@ -40,7 +40,7 @@ with DAG(
         task_id="run_dbt",
         bash_command=(
             f"if [ -d {project_root}/dbt ]; then "
-            f"cd {project_root}/dbt && dbt run; "
+            f"cd {project_root}/dbt && exec dbt run --profiles-dir {project_root}/dbt; "
             f"else echo 'dbt project not found at {project_root}/dbt' >&2; exit 1; fi"
         ),
     )

@@ -3,9 +3,9 @@ youtube_dbt:
   outputs:
     dev:
       type: postgres
-      host: localhost
-      user: yt_user
-      password: password
+      host: postgres
+      user: airflow
+      password: airflow
       port: 5432
-      dbname: youtube_data
+      dbname: airflow
       schema: public
