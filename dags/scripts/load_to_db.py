@@ -10,11 +10,11 @@ from contextlib import closing
 from typing import Optional
 
 
-# Reads latest CSV file and pushes the data into database
-####################################
 repo_root = Path(__file__).resolve().parents[1]
 data_dir = repo_root / "data"
 
+# Reads latest CSV file and pushes the data into database
+####################################
 def find_latest_file(data_dir: Path) -> Path:
 	files = sorted(data_dir.glob("trending_*.csv"), key=lambda p: p.stat().st_mtime, reverse=True)
 	if not files:
@@ -22,11 +22,9 @@ def find_latest_file(data_dir: Path) -> Path:
 	return files[0]
 
 
+# Load the latest CSV into the database
+####################################
 def load_latest(dry_run: bool = False, database_url: Optional[str] = None) -> None:
-	"""Load the latest CSV into the database.
-
-	This function is import-safe and intended to be called from a PythonOperator.
-	"""
 	latest = find_latest_file(data_dir)
 	DATABASE_URL = database_url or os.environ.get(
 		"DATABASE_URL",

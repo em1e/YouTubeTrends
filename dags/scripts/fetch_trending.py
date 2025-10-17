@@ -5,7 +5,7 @@ from datetime import datetime
 import argparse
 from pathlib import Path
 
-# Return the API key from .env file.
+# Grab the API key from .env file
 ##################################
 def load_api_key(explicit_key=None):
     if explicit_key:
