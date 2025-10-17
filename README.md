@@ -39,66 +39,16 @@ In Airflow, a DAG or Directed Acyclic Graph, is a collection of all the tasks yo
 git clone https://github.com/em1e/YouTubeTrends.git
 ```
 
-2) Create and activate a virtual environment (venv) and install dependencies:
-
-```
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-3) Add your YouTube API key
+2) Add your YouTube API key
 
 	- Create a `.env` file in the repo root (example `.env.example` provided):
 		`API_KEY=YOUR_YOUTUBE_API_KEY`
 
 	note: fetch_trending.py will attempt to read `API_KEY` and try to load `.env` from the project root.
 
-4) Create postgres database (if you haven't yet)
+3) Airflow and Scheduling
 
-	The loader script `scripts/load_to_db.py` currently uses a hardcoded connection :P:
-
-	`postgresql://yt_user:password@localhost:5432/youtube_data`
-
-	NOTE: Yes if I'd go further with the project, it could get changed to something like bigquery, but eh it's fine for now.
-
-	#### Using Docker:
-
-	  1. Start a Postgres container with a mapped port and a default password:
-
-	```
-	docker run --name yt-postgres -e POSTGRES_PASSWORD=password -e POSTGRES_USER=yt_user -e POSTGRES_DB=youtube_data -p 5432:5432 -d postgres:15
-	```
-
-	  2. Wait a few seconds for the DB to be ready, then the loader can connect using:
-
-			`postgresql://yt_user:password@localhost:5432/youtube_data`
-
-	  3. To stop and remove the container when you're done:
-
-			`docker stop yt-postgres && docker rm yt-postgres`
-
-
-5) Run the fetch script (this writes a CSV into `data/`):
-
-	`python scripts/fetch_trending.py`
-
-	You should see a confirmation message and a new file under `data/` named like `trending_US_YYYY-MM-DD_HH-MM-SS.csv`.
-
-6) Load a CSV into PostgreSQL
-
-	The `scripts/load_to_db.py` script expects a PostgreSQL instance and a connection string currently hardcoded to, listed above:
-
-	`postgresql://yt_user:password@localhost:5432/youtube_data`
-
-	So if you started the docker with something else, do edit `scripts/load_to_db.py` to match your database credentials. Then run:
-
-	`python scripts/load_to_db.py`
-
-### How to use Airflow and Scheduling?
-
-I'm using Airflows default Docker Compose file to run the airflow webserver, requirements are included with my `dockerfile`.
+I'm using Airflows default Docker Compose file to run the airflow webserver, requirements are included with my `dockerfile` and `requirements.txt`.
 
 - `docker compose up --build` -> build requirements and start all services
 - `docker compose down --volumes --rmi all` -> clean up when done
@@ -109,7 +59,7 @@ user: `airflow`
 password: `airflow`
 
 ## What did I learn?
-I learned a lot during a small window, Airflow, DAGs, dbt, Youtube API and all that stuff was completely new to me! Gotta say I overall enjoyed the debugging and learning process C:
+I learned a lot during a small window, Airflow, DAGs, dbt, Youtube API. There were a LOT of things that were completely new to me! Gotta say I overall enjoyed the debugging and learning process over these past few days C:
 
 ![airflow_dashboard](assets/airflow_dag_runs.png)
 ![output](assets/output_files.png)
