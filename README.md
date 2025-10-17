@@ -55,6 +55,7 @@ I'm using Airflows default Docker Compose file to run the airflow webserver, req
 
 Then you should be able to open the Airflow web server at http://localhost:8080 and enable the `youtube_trending_pipeline` DAG.
 
+db name: `airflow`
 user: `airflow`
 password: `airflow`
 
