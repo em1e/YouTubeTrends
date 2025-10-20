@@ -48,7 +48,7 @@ git clone https://github.com/em1e/YouTubeTrends.git
 
 3) Airflow and Scheduling
 
-I'm using Airflows default Docker Compose file to run the airflow webserver, requirements are included with my `dockerfile` and `requirements.txt`.
+I'm using Airflow's default Docker Compose file (with small modifications) to run the airflow webserver, requirements are included with my `dockerfile` and `requirements.txt`.
 
 - `docker compose up --build` -> build requirements and start all services
 - `docker compose down --volumes --rmi all` -> clean up when done
